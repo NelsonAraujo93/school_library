@@ -1,4 +1,4 @@
-require './person.rb'
+require './person'
 class Student < Person
   def initialize(classroom, age, name, parent_permission)
     @classroom = classroom
@@ -6,21 +6,21 @@ class Student < Person
   end
 
   def play_hooky
-    return '"¯\(ツ)/¯"'
+    '"¯\(ツ)/¯"'
   end
 end
 
-s= Student.new('3A', 26, 'Jaime', false)
+s = Student.new('3A', 26, 'Jaime', false)
 
-puts s.get_name
-puts s.get_age
-puts s.get_id
+puts s.person_name
+puts s.person_age
+puts s.person_id
 
-s.set_age(30)
-s.set_name('Falco')
+s.def_age(30)
+s.def_name('Falco')
 
-puts s.get_name
-puts s.get_age
+puts s.person_name
+puts s.person_age
 
 puts s.can_use_services?
 puts s.play_hooky

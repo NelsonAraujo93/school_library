@@ -1,4 +1,4 @@
-require './person.rb'
+require './person'
 class Teacher < Person
   def initialize(specialization, age, name, parent_permission)
     @specialization = specialization
@@ -10,16 +10,16 @@ class Teacher < Person
   end
 end
 
-t= Teacher.new('Maths', 26, 'Jaime', false)
+t = Teacher.new('Maths', 26, 'Jaime', false)
 
-puts t.get_name
-puts t.get_age
-puts t.get_id
+puts t.person_name
+puts t.person_age
+puts t.person_id
 
-t.set_age(30)
-t.set_name('Falco')
+t.def_age(30)
+t.def_name('Falco')
 
-puts t.get_name
-puts t.get_age
+puts t.person_name
+puts t.person_age
 
 puts t.can_use_services?
