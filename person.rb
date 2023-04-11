@@ -4,6 +4,7 @@ require './trimmer_decorator'
 class Person < Nameable
   # Initialize
   def initialize(age, name = 'Unknown', parent_permission: true)
+    super()
     @age = age
     @name = name
     @parent_permission = parent_permission
