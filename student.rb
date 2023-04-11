@@ -12,15 +12,15 @@ end
 
 s = Student.new('3A', 26, 'Jaime', false)
 
-puts s.person_name
-puts s.person_age
-puts s.person_id
+puts s.name
+puts s.age
+puts s.id
 
-s.def_age(30)
-s.def_name('Falco')
+s.age = 30
+s.name = 'Falco'
 
-puts s.person_name
-puts s.person_age
+puts s.name
+puts s.age
 
 puts s.can_use_services?
 puts s.play_hooky

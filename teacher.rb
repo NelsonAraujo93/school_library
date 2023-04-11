@@ -12,14 +12,14 @@ end
 
 t = Teacher.new('Maths', 26, 'Jaime', false)
 
-puts t.person_name
-puts t.person_age
-puts t.person_id
+puts t.name
+puts t.age
+puts t.id
 
-t.def_age(30)
-t.def_name('Falco')
+t.age = 30
+t.name = 'Falco'
 
-puts t.person_name
-puts t.person_age
+puts t.name
+puts t.age
 
 puts t.can_use_services?
