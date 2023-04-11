@@ -23,3 +23,5 @@ puts t.name
 puts t.age
 
 puts t.can_use_services?
+
+puts t.correct_name
