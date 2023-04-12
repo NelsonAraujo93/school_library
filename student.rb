@@ -1,26 +1,21 @@
 require './person'
+require './classroom'
+
 class Student < Person
-  def initialize(classroom, age, name, parent_permission)
-    @classroom = classroom
+  def initialize(classroom_label, age, name, parent_permission)
+    @classroom = Classroom.new(classroom_label)
     super(age, name, parent_permission: parent_permission)
   end
+
+  attr_accessor :classroom
 
   def play_hooky
     '"¯\(ツ)/¯"'
   end
+
+  def add_classroom(classroom)
+    @classroom = classroom
+    classroom.students << self
+  end
+  
 end
-
-s = Student.new('3A', 26, 'Jaime', false)
-
-puts s.name
-puts s.age
-puts s.id
-
-s.age = 30
-s.name = 'Falco'
-
-puts s.name
-puts s.age
-
-puts s.can_use_services?
-puts s.play_hooky

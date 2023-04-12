@@ -9,10 +9,11 @@ class Person < Nameable
     @name = name
     @parent_permission = parent_permission
     @id = rand(0..1000)
+    @rentals = []
   end
 
   attr_accessor :name, :age
-  attr_reader :id
+  attr_reader :id, :rentals
 
   # Methods
   def of_age?
@@ -26,13 +27,12 @@ class Person < Nameable
   def correct_name
     @name
   end
+
+  def add_rental(rental)
+    @rentals << rental
+    rental.person = self
+  end
+
   private :of_age?
   public :can_use_services?
 end
-
-person = Person.new(22, 'maximilianus')
-puts person.correct_name
-puts capitalized_person = CapitalizeDecorator.new(person)
-puts capitalized_person.correct_name
-puts capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-puts capitalized_trimmed_person.correct_name
