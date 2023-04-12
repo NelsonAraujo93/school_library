@@ -2,6 +2,9 @@ require './nameable'
 require './capitalize_decorator'
 require './trimmer_decorator'
 class Person < Nameable
+  attr_accessor :name, :age, :rentals
+  attr_reader :id
+
   # Initialize
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
@@ -11,9 +14,6 @@ class Person < Nameable
     @id = rand(0..1000)
     @rentals = []
   end
-
-  attr_accessor :name, :age
-  attr_reader :id, :rentals
 
   # Methods
   def of_age?
@@ -28,9 +28,8 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(rental)
-    @rentals << rental
-    rental.person = self
+  def add_rental(book, date)
+    Rental.new(date, book, self)
   end
 
   private :of_age?
