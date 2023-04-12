@@ -17,5 +17,4 @@ class Student < Person
     @classroom = classroom
     classroom.students << self
   end
-  
 end
