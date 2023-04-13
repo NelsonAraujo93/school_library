@@ -8,11 +8,11 @@ class App
     @rentals = []
     @functions = {
       1 => :list_books,
-      2 => :listp_index,
+      2 => :list_persons_index,
       3 => :add_person,
       4 => :add_book,
       5 => :add_rental,
-      6 => :rentalsby_personid
+      6 => :rentals_by_person_id
     }
   end
 
@@ -77,7 +77,7 @@ class App
     end
     book_index = gets.chomp.to_i
     puts 'Select a person from the following list by number (not ID):'
-    persons = listp_index
+    persons = list_persons_index
     person_index = gets.chomp.to_i
     puts ''
     print 'Date: '
@@ -98,7 +98,7 @@ class App
     end
   end
 
-  def listp_index
+  def list_persons_index
     persons = @students + @teachers
     if persons.empty?
       puts 'There is no registered person.'
@@ -116,14 +116,14 @@ class App
     persons
   end
 
-  def rentalsby_personid
+  def rentals_by_person_id
     print 'Please enter the person ID: '
     person_id = gets.chomp.to_i
     persons = @students + @teachers
     filtered_person = persons.select { |person| person.id == person_id }
     if filtered_person[0].nil?
       puts ['Error, you must choose an existing id', '']
-      rentalsby_personid
+      rentals_by_person_id
     else
       print "#{filtered_person[0].name}'s rentals:"
       puts ''
