@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 require './app'
-require './student.rb'
-require './teacher.rb'
-require './book.rb'
-require './rental.rb'
+require './student'
+require './teacher'
+require './book'
+require './rental'
 
-$app = App.new()
 puts 'Welcome to School Library App!'
 
 def options
@@ -13,38 +12,22 @@ def options
   puts ['1 - List all books', '2 - List all people', '3 - Create a person']
   puts ['4 - Create a book', '5 - Create a rental', '6 - List all rental for a given person id']
   puts ['7 - Exit']
-  option = gets.chomp
 end
 
 def main
-  option = options
-  case option
-  when '1'
-    if $app.books.length === 0
-      puts ['','There are no books created yet.', '']
+  @app = App.new if @app.nil?
+  options
+  option = gets.chomp.to_i
+  valid_options = [1, 2, 3, 4, 5, 6, 7]
+  if valid_options.include?(option)
+    if option == 7
+      puts 'Thanks for using this app'
     else
-      $app.list_books
+      @app.function(option)
+      main
     end
-    main
-  when '2'
-    $app.list_persons_index
-    main
-  when '3'
-    $app.add_person
-    main
-  when '4'
-    $app.add_book
-    main
-  when '5'
-    $app.add_rental
-    main
-  when '6'
-    $app.rentals_by_person_id
-    main
-  when '7'
-    puts ('Thanks, see you soon')
   else
-    puts ('Error! Please select one of the options listed below')
+    puts ['Error, choose one of the options', '']
     main
   end
 end
