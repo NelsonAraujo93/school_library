@@ -4,6 +4,7 @@ require './student'
 require './teacher'
 require './book'
 require './rental'
+require 'pry'
 
 puts 'Welcome to School Library App!'
 
@@ -17,7 +18,7 @@ end
 def main
   @app = App.new if @app.nil?
   options
-  option = gets.chomp.to_i
+  option = gets.chomp
   valid_options = [1, 2, 3, 4, 5, 6, 7]
   if valid_options.include?(option)
     if option == 7
