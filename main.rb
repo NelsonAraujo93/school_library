@@ -19,6 +19,7 @@ def main
   @app = App.new if @app.nil?
   options
   option = gets.chomp
+  binding.pry
   valid_options = [1, 2, 3, 4, 5, 6, 7]
   if valid_options.include?(option)
     if option == 7
