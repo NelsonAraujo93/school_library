@@ -34,26 +34,16 @@ class App
   end
 
   def add_person
-    print 'Do you want to create a student (1) or a teacher (2)?: [input the number]: '
-    option = gets.chomp
-    case option
-    when '1'
-      print 'Age: '
-      age = gets.chomp
-      print 'Name: '
-      name = gets.chomp
-      print 'Has parent permission? [Y/N]: '
-      permission = gets.chomp
-      add_student(age, name, permission)
-    when '2'
-      print 'Age: '
-      age = gets.chomp
-      print 'Name: '
-      name = gets.chomp
-      print 'Specialization: '
-      specialization = gets.chomp
-      add_teacher(age, name, specialization)
-    end
+    type_person = input_getter('Do you want to create a student (1) or a teacher (2)?: [input the number]: ', is_number: true)
+    # if type is not valid
+    return if type_person > 2 || type_person < 1
+    # gets common data
+    age = input_getter('Age: ')
+    name = input_getter('Name: ')
+    # creates student if type is 1
+    return add_student(age, name, input_getter('Has parent permission? [Y/N]: ')) if type_person == 1
+    # otherwise it creates a teacher
+    add_teacher(age, name, input_getter('Specialization: '))
   end
 
   def add_student(age, name, permission)
