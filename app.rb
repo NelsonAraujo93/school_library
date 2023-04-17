@@ -34,14 +34,17 @@ class App
   end
 
   def add_person
-    type_person = input_getter('Do you want to create a student (1) or a teacher (2)?: [input the number]: ', is_number: true)
+    type_person = input_getter('Do you want to create a student (1) or a teacher (2)?: [input the number]: ',
+                               is_number: true)
     # if type is not valid
     return if type_person > 2 || type_person < 1
+
     # gets common data
     age = input_getter('Age: ')
     name = input_getter('Name: ')
     # creates student if type is 1
     return add_student(age, name, input_getter('Has parent permission? [Y/N]: ')) if type_person == 1
+
     # otherwise it creates a teacher
     add_teacher(age, name, input_getter('Specialization: '))
   end
@@ -49,7 +52,7 @@ class App
   def add_student(age, name, permission)
     # if permission is not a valid input, ask again
     return add_person if permission.capitalize != 'Y' && permission.capitalize != 'N'
-    
+
     has_permission = permission.capitalize == 'Y'
     @students << Student.new(age, name, parent_permission: has_permission)
     puts ['Person created succesfully', '']
