@@ -18,7 +18,7 @@ class App
 
   def input_getter(msj, is_number: false)
     print msj
-    value = is_number ? gets.chomp.to_i : gets.chomp
+    is_number ? gets.chomp.to_i : gets.chomp
   end
 
   def print_add_book
