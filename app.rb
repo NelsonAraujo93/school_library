@@ -10,17 +10,21 @@ class App
       1 => :list_books,
       2 => :list_persons_index,
       3 => :add_person,
-      4 => :add_book,
+      4 => :print_add_book,
       5 => :add_rental,
       6 => :rentals_by_person_id
     }
   end
 
-  def add_book
+  def print_add_book
     print 'Title: '
     title = gets.chomp
     print 'Author: '
     author = gets.chomp
+    add_book(title, author)
+  end
+
+  def add_book(title, author)
     new_book = Book.new(title, author)
     puts ['Book created succesfully!', '']
     @books << new_book
