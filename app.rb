@@ -56,8 +56,7 @@ class App
   end
 
   def add_teacher(age, name, specialization)
-    n_teacher = Teacher.new(specialization, age, name, parent_permission: true)
-    @teachers << n_teacher
+    @teachers << Teacher.new(specialization, age, name, parent_permission: true)
     puts ['Person created succesfully', '']
   end
 
