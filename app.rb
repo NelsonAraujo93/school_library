@@ -16,11 +16,14 @@ class App
     }
   end
 
+  def input_getter(msj, is_number = true)
+    print msj
+    value = is_number ? get.chomp.to_i : gets.chomp
+  end
+
   def print_add_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
+    title = input_getter('Title: ', false)
+    author = input_getter('Author: ', false)
     add_book(title, author)
   end
 
