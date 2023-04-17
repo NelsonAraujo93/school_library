@@ -47,17 +47,12 @@ class App
   end
 
   def add_student(age, name, permission)
-    if permission.capitalize == 'N'
-      n_student = Student.new(age, name, parent_permission: false)
-      @students << n_student
-      puts ['Person created succesfully', '']
-    elsif permission.capitalize == 'Y'
-      n_student = Student.new(age, name, parent_permission: true)
-      @students << n_student
-      puts ['Person created succesfully', '']
-    else
-      add_person
-    end
+    # if permission is not a valid input, ask again
+    return add_person if permission.capitalize != 'Y' && permission.capitalize != 'N'
+    
+    has_permission = permission.capitalize == 'Y'
+    @students << Student.new(age, name, parent_permission: has_permission)
+    puts ['Person created succesfully', '']
   end
 
   def add_teacher(age, name, specialization)
