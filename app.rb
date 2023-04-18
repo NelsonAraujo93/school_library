@@ -10,62 +10,56 @@ class App
       1 => :list_books,
       2 => :list_persons_index,
       3 => :add_person,
-      4 => :add_book,
+      4 => :print_add_book,
       5 => :add_rental,
       6 => :rentals_by_person_id
     }
   end
 
-  def add_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
+  def input_getter(msj, is_number: false)
+    print msj
+    is_number ? gets.chomp.to_i : gets.chomp
+  end
+
+  def print_add_book
+    title = input_getter('Title: ')
+    author = input_getter('Author: ')
+    add_book(title, author)
+  end
+
+  def add_book(title, author)
     new_book = Book.new(title, author)
     puts ['Book created succesfully!', '']
     @books << new_book
   end
 
   def add_person
-    print 'Do you want to create a student (1) or a teacher (2)?: [input the number]: '
-    option = gets.chomp
-    case option
-    when '1'
-      print 'Age: '
-      age = gets.chomp
-      print 'Name: '
-      name = gets.chomp
-      print 'Has parent permission? [Y/N]: '
-      permission = gets.chomp
-      add_student(age, name, permission)
-    when '2'
-      print 'Age: '
-      age = gets.chomp
-      print 'Name: '
-      name = gets.chomp
-      print 'Specialization: '
-      specialization = gets.chomp
-      add_teacher(age, name, specialization)
-    end
+    type_person = input_getter('Do you want to create a student (1) or a teacher (2)?: [input the number]: ',
+                               is_number: true)
+    # if type is not valid
+    return if type_person > 2 || type_person < 1
+
+    # gets common data
+    age = input_getter('Age: ')
+    name = input_getter('Name: ')
+    # creates student if type is 1
+    return add_student(age, name, input_getter('Has parent permission? [Y/N]: ')) if type_person == 1
+
+    # otherwise it creates a teacher
+    add_teacher(age, name, input_getter('Specialization: '))
   end
 
   def add_student(age, name, permission)
-    if permission.capitalize == 'N'
-      n_student = Student.new(age, name, parent_permission: false)
-      @students << n_student
-      puts ['Person created succesfully', '']
-    elsif permission.capitalize == 'Y'
-      n_student = Student.new(age, name, parent_permission: true)
-      @students << n_student
-      puts ['Person created succesfully', '']
-    else
-      add_person
-    end
+    # if permission is not a valid input, ask again
+    return add_person if permission.capitalize != 'Y' && permission.capitalize != 'N'
+
+    has_permission = permission.capitalize == 'Y'
+    @students << Student.new(age, name, parent_permission: has_permission)
+    puts ['Person created succesfully', '']
   end
 
   def add_teacher(age, name, specialization)
-    n_teacher = Teacher.new(specialization, age, name, parent_permission: true)
-    @teachers << n_teacher
+    @teachers << Teacher.new(specialization, age, name, parent_permission: true)
     puts ['Person created succesfully', '']
   end
 
